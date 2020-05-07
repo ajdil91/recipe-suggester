@@ -1,0 +1,12 @@
+{% extends 'recipe_app/base.html' %}
+{% block body_block %}
+{% load static %}
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete {{object}}?</p>
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
+
+{% endblock %}

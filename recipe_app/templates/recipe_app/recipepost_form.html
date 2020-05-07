@@ -1,0 +1,20 @@
+{% extends 'recipe_app/base.html' %}
+{% load bootstrap3 %}
+{% block body_block %}
+{% load static %}
+<div class="container">
+    <div class="jumbotron" id="add-recipe-form">
+        <h1>Add a New Recipe!</h1>
+        {% if form.errors %}
+            <p>Please try again.</p>
+        {% endif %}
+        <form enctype="multipart/form-data" method="POST">
+            <div class="form-group">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" class="index-button" value="Add Recipe">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

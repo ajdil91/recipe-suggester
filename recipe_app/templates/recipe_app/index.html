@@ -1,0 +1,22 @@
+{% extends 'recipe_app/base.html' %}
+{% block body_block %}
+{% load static %}
+
+    <div id="banner">
+        <div class="container homepage-content">
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 pull-right">
+                    <h1>Your Daily Yum!</h1>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'recipe_app:recipepost_list' %}" class="index-button" id="index-button">Go to Recipes</a>
+                    {% else %}
+                        <a href="{% url 'recipe_app:login' %}" class="index-button" id="index-button">Login</a>
+                        <a href="{% url 'recipe_app:register' %}" class="signup-button" id="index-button">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'recipe_app/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block body_block %}
+
+<div class="container">
+    <div class="jumbotron" id="add-recipe-form">
+        {% if registered %}
+            <h1>Thank you for registering!</h1>
+        {% else %}
+            <h1>Register Here!</h1>
+            <form enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {% bootstrap_form user_form %}
+                    {% bootstrap_form profile_form %}
+                    <input type="submit" class="index-button" value="Register">
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

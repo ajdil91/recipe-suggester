@@ -1,0 +1,349 @@
+/**************/
+/* Index Page */
+/**************/
+
+a p {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #fffaf4 !important;
+    padding-bottom: 40px;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.index-button {
+    display: inline-block;
+    font-weight: 500;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-color: #ffda08;
+    margin-top: 20px;
+}
+
+.index-button:hover {
+    color: #212529;
+    text-decoration: none;
+    opacity: 0.95;
+}
+
+.signup-button {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin: 20px 10px 0 10px;
+    background-color: transparent;
+    color: white;
+    border: 2px white solid;
+}
+
+.signup-button:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+#base-nav {
+    background-color: black;
+    color: white;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-item.dropdown {
+    font-size: 18px;
+}
+
+.nav-item:hover {
+    color: white;
+    text-decoration: none;
+}
+
+#banner{
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url("../images/sebastian-coman-photography-g6a9U4CjI0k-unsplash.jpg") fixed;
+    background-size: 100%;
+    width: 100%;
+    height: 700px;
+    background-repeat: no-repeat;
+    position: relative;
+    display: block;
+}
+
+@media screen and (max-width: 850px) {
+    #banner{
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url("../images/sebastian-coman-photography-g6a9U4CjI0k-unsplash.jpg") fixed;
+        background-size: cover;
+        width: 100%;
+        height: 650px;
+        background-repeat: no-repeat;
+        position: relative;
+        display: block;
+    }
+}
+
+.homepage-content {
+    text-align: center;
+}
+
+.homepage-content h1{
+    color: white;
+    padding-top: 200px;
+    font-size: 54px;
+}
+
+h1 {
+    font-family: 'Roboto Slab', serif;
+}
+
+/**************************/
+/* Recipe Post List Page */
+/**************************/
+
+.list-page-header {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.thumbnail {
+    padding: .50rem;
+    background-color: #fff;
+    border-radius: .25rem;
+    width: auto;
+    height: 300px;
+    object-fit: cover;
+}
+
+.thumbnail:hover {
+    transform: scale(0.99)
+}
+
+.recipe-card-link {
+    color: black;
+}
+
+.recipe-card-link:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.card.recipe-card {
+    width: 23rem !important;
+    margin-bottom: 15px;
+    border: 5px solid;
+}
+
+/*
+.recipe-card:hover {
+    box-shadow: 0px 0px 7px 7px #ebebeb;
+}
+*/
+
+.add-button {
+    display: inline-block;
+    font-weight: 600;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 3rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-color: transparent;
+    position: absolute;
+    right: 0.4em;
+    bottom: 0.75em;
+}
+
+.add-button:hover {
+    color: #666560;
+    text-decoration: none;
+}
+
+/****************************/
+/* Recipe Post Detail Page */
+/****************************/
+
+.recipe-detail-image {
+    width: 650px;
+    height: 500px;
+    object-fit: cover;
+    border-style: solid;
+    color: black;
+    border-width: 10px;
+}
+
+.recipe-detail-text{
+    background-color: #ffda08;
+    position: relative;
+    width: auto;
+    height: 500px;
+    padding-left: 50px !important;
+    padding-top: 25px;
+    border: 4px;
+    border-style: solid;
+    color: black;
+    outline: 10px solid black;
+    outline-offset: -25px;
+}
+
+.recipe-detail-url {
+    color: #212529;
+    font-size: 1.8rem;
+}
+
+.recipe-detail-url:hover {
+    color: #666560;
+}
+
+.modify-button {
+    display: inline-block;
+    font-weight: 600;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-color: transparent;
+}
+
+.modify-button:hover {
+    color: #666560;
+    text-decoration: none;
+}
+
+.post-details {
+    padding-top: 1rem;
+}
+
+/*******************/
+/* Add Recipe Form */
+/*******************/
+
+.imageinputclass {
+    position: relative;
+    padding-left: 15px;
+}
+
+#add-recipe-form {
+    background-color: white;
+    margin: 80px;
+    border: 10px solid;
+}
+
+.bootstrap3-multi-input {
+    margin-left: 1px !important;
+}
+/*******************/
+/* Login Form */
+/*******************/
+
+.login {
+    margin: 15px 15px 0 0;
+}
+
+
+/**************/
+/* Mobile CSS */
+/**************/
+
+@media screen and (max-width: 850px) {
+    .recipe-detail-image {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-style: solid;
+        color: black;
+        border-width: 10px;
+    }
+    .detail-image-div {
+        padding: 0px !important;
+    }
+    .list-page-header {
+        text-align: center;
+    }
+    #phone-padding {
+        padding-left: 0;
+    }
+    .card.recipe-card {
+        width: 23rem !important;
+        margin-bottom: 15px;
+        border: 5px solid;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .recipe-detail-text {
+        background-color: #ffda08;
+        position: relative;
+        width: auto;
+        height: 350px;
+        padding: 25px 30px !important;
+        border: 4px;
+        border-style: solid;
+        color: black;
+        outline: 10px solid black;
+        outline-offset: -25px;
+        text-align: center;
+    }
+    #add-recipe-form {
+        background-color: white;
+        margin: 15px 0;
+        border: 10px solid;
+    }
+    #add-recipe-form h1{
+        text-align: center;
+    }
+    .add-button {
+        display: none;
+    }
+}

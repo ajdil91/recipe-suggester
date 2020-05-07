@@ -1,0 +1,35 @@
+{% extends 'recipe_app/base.html' %}
+{% block body_block %}
+
+<div class="container">
+   <div class="jumbotron" id="add-recipe-form">
+        <h1>Please Login</h1>
+
+        {% if form.errors %}
+            <p>Your username and password didn't match! Please try again.</p>
+        {% endif %}
+
+        <form action="{% url 'recipe_app:login' %}" method="post">
+            <div class="container">
+                <div class="row">
+                {% csrf_token %}
+                <div class="login">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" placeholder="Enter Username">
+                </div>
+                <div class="login">
+                    <label for="password">Password:</label>
+                    <input type="text" name="password" placeholder="Enter Password">
+                </div>
+                </div>
+                 <div class="row">
+                    <input type="submit" class="index-button" value="Login">
+                    <input type="hidden" name="next" value="next">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
