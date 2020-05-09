@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import UserProfileInfo, RecipePost
+from django.utils.translation import ugettext_lazy as _
 
 
 class UserForm(forms.ModelForm):
@@ -32,11 +33,13 @@ class RecipePostForm(forms.ModelForm):
 
     class Meta():
         model = RecipePost
-        fields = ('author', 'title', 'url', 'image', 'text')
+        fields = ('author', 'title', 'url', 'image', 'description', 'ingredients')
+        labels = {'ingredients': _('Ingredients & Recipe')}
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'textinputclass'}),
             'url': forms.URLInput(attrs={'class': 'textinputclass'}),
             'image': forms.ClearableFileInput(attrs={'class': 'imageinputclass'}),
-            'text': forms.Textarea(attrs={'class': 'textinputclass'})  # come back and edit this? Check my first clone project
+            'description': forms.Textarea(attrs={'class': 'textinputclass'}),
+            'ingredients': forms.Textarea(attrs={'class': 'textinputclass'}),
         }

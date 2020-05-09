@@ -11,10 +11,12 @@
         <form enctype="multipart/form-data" method="POST">
             <div class="form-group">
                 {% csrf_token %}
+                {{form.media}}
                 {% bootstrap_form form %}
                 <input type="submit" class="index-button" value="Add Recipe">
             </div>
         </form>
     </div>
 </div>
+
 {% endblock %}
