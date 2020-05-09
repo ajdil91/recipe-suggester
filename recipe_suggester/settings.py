@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'ckeditor',
     'recipe_app',
 ]
 
@@ -136,3 +137,18 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 
 LOGIN_URL = 'recipe_app/login'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'toolbar': None, #You can change this based on your requirements.
+        'toolbar': [
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+            ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+             'JustifyRight', 'JustifyBlock'],
+            ['TextColor', 'BGColor']
+        ],
+        'width': 'auto',
+
+              },
+    }
