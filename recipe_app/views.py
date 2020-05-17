@@ -11,6 +11,9 @@ from django.views.generic import (TemplateView, ListView,
                                   DetailView, CreateView,
                                   UpdateView, DeleteView)
 
+import requests
+import random
+
 # Create your views here.
 
 
@@ -112,3 +115,37 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('recipe_app:index'))
+
+#################################
+################################
+
+
+def search_api(request):
+    if request.method == 'POST':
+        search_keyword = request.POST.get('search', None)
+        if search_keyword:
+            response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?i={}'.format(search_keyword))
+            print(response)
+
+        if response.status_code == 200 and request.method == 'POST':
+            data = response.json()
+            meals = data['meals']
+            print(len(meals))
+            meal_id_array = [meals[i]['idMeal'] for i in range(len(meals))]
+            print(meal_id_array)
+            random.shuffle(meal_id_array)
+            print(meal_id_array)
+            random_meal_id = meal_id_array[0]
+            print(random_meal_id)
+            rsp = requests.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random_meal_id))
+            if rsp.status_code == 200 and request.method == 'POST':
+                data = rsp.json()
+                meal = data['meals']
+                print(meal)
+            else:
+                return HttpResponse('Meal ID not found')
+            return HttpResponse(data['meals'])
+        else:
+            return HttpResponse('Item not found')
+    else:
+        return render(request, 'recipe_app/search.html', context={})

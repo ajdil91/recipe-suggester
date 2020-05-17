@@ -11,5 +11,6 @@ urlpatterns = [
     re_path(r'^recipe/new/$', views.CreateRecipePostView.as_view(), name='recipe_new'),
     re_path(r'^recipes/$', views.RecipeListView.as_view(), name='recipepost_list'),
     re_path(r'^recipe/(?P<pk>\d+)/edit/$', views.RecipePostUpdateView.as_view(), name='recipe_update'),
-    re_path(r'^recipe/(?P<pk>\d+)/remove/$', views.RecipePostDeleteView.as_view(), name='recipe_delete')
+    re_path(r'^recipe/(?P<pk>\d+)/remove/$', views.RecipePostDeleteView.as_view(), name='recipe_delete'),
+    re_path(r'^search/$', views.search_api, name='search'),
 ]
