@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from .models import RecipePost
+# from .services import search_api
 from .forms import UserForm, UserProfileInfoForm, RecipePostForm
 from django.views.generic import (TemplateView, ListView,
                                   DetailView, CreateView,
@@ -19,6 +20,17 @@ import random
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+
+class SearchResults(TemplateView):
+    template_name = 'search_results.html'
+
+    # def get_context_data(self, request, *args, **kwargs):
+    #     context = {
+    #         'meal': search_api(request)
+    #     }
+    #     # return context
+    #     return render(request, 'recipe_app/search_results.html', context)
 
 
 class RecipeListView(LoginRequiredMixin, ListView):
@@ -51,6 +63,7 @@ class RecipePostUpdateView(LoginRequiredMixin, UpdateView):
 class RecipePostDeleteView(LoginRequiredMixin, DeleteView):
     model = RecipePost
     success_url = reverse_lazy('recipe_app:recipepost_list')
+
 
 #################################
 ################################
@@ -121,31 +134,27 @@ def user_logout(request):
 
 
 def search_api(request):
-    if request.method == 'POST':
-        search_keyword = request.POST.get('search', None)
-        if search_keyword:
-            response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?i={}'.format(search_keyword))
-            print(response)
+    meal = {}
+    if 'search' in request.GET:
+        meal_search = request.GET['search']
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?i={}'.format(meal_search))
+        print(response)
 
-        if response.status_code == 200 and request.method == 'POST':
-            data = response.json()
-            meals = data['meals']
-            print(len(meals))
-            meal_id_array = [meals[i]['idMeal'] for i in range(len(meals))]
-            print(meal_id_array)
+        data = response.json()
+        meal = data['meals']
+        print(meal)
+        if meal is None or len(meal) == 0:
+            print('No meals')
+        elif len(meal) >= 1:
+            meal_id_array = [meal[i]['idMeal'] for i in range(len(meal))]
             random.shuffle(meal_id_array)
-            print(meal_id_array)
             random_meal_id = meal_id_array[0]
-            print(random_meal_id)
             rsp = requests.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random_meal_id))
-            if rsp.status_code == 200 and request.method == 'POST':
-                data = rsp.json()
-                meal = data['meals']
-                print(meal)
-            else:
-                return HttpResponse('Meal ID not found')
-            return HttpResponse(data['meals'])
+            randomized_data = rsp.json()
+            random_meal = randomized_data['meals']
+            print('Meal', random_meal)
+            return render(request, 'recipe_app/search_results.html', {'meal': random_meal})
         else:
             return HttpResponse('Item not found')
     else:
-        return render(request, 'recipe_app/search.html', context={})
+        return render(request, 'recipe_app/search.html', {'meals': meal})
