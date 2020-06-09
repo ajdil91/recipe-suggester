@@ -1,0 +1,17 @@
+{% extends 'recipe_app/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block body_block %}
+
+
+<div class="container">
+    <h1>Results</h1>
+    {% if meal %}
+        <h1>Meal: {{meal.0.strMeal}}</h1>
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}

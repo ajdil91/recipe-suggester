@@ -13,4 +13,5 @@ urlpatterns = [
     re_path(r'^recipe/(?P<pk>\d+)/edit/$', views.RecipePostUpdateView.as_view(), name='recipe_update'),
     re_path(r'^recipe/(?P<pk>\d+)/remove/$', views.RecipePostDeleteView.as_view(), name='recipe_delete'),
     re_path(r'^search/$', views.search_api, name='search'),
+    re_path(r'^results/$', views.SearchResults.as_view(), name='search_results'),
 ]
