@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
-from .models import RecipePost
+from .models import RecipePost, TemporaryImage
 # from .services import search_api
 from .forms import UserForm, UserProfileInfoForm, RecipePostForm
 from django.views.generic import (TemplateView, ListView,
@@ -14,23 +14,74 @@ from django.views.generic import (TemplateView, ListView,
 
 import requests
 import random
+from urllib.parse import urlparse
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 
 # Create your views here.
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
+def index(request):
+    meal = {}
+
+    if 'search' in request.GET:
+        meal_search = request.GET['search']
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?i={}'.format(meal_search))
+        print(response)
+
+        data = response.json()
+        meal = data['meals']
+        print(meal)
+        if meal is None or len(meal) == 0:
+            print('No meals')
+        elif len(meal) >= 1:
+            meal_id_array = [meal[i]['idMeal'] for i in range(len(meal))]
+            random.shuffle(meal_id_array)
+            random_meal_id = meal_id_array[0]
+            rsp = requests.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random_meal_id))
+            randomized_data = rsp.json()
+            random_meal = randomized_data['meals']
+            print('Meal', random_meal)
+            image_url = random_meal[0]['strMealThumb']
+            temp_image = temporary_image(image_url)
+            # return render(request, 'recipe_app/search_results.html', {'meal': random_meal})
+            return render(request, 'recipe_app/search_results.html', context={'meal': random_meal,
+                                                                              'temp_image': temp_image})
+        else:
+            return HttpResponse('Item not found')
+    else:
+        return render(request, 'recipe_app/index.html', {'meals': meal})
+
+
+def temporary_image(url):
+    api_image = TemporaryImage()
+    img_url = url
+
+    image_temp_file = NamedTemporaryFile()
+    name = urlparse(img_url).path.split('/')[-1]
+    image_type = name.split('.')[-1]
+    content = requests.get(img_url, stream=True)
+
+    for block in content.iter_content(1024 * 8):
+
+        # If no more file then stop
+        if not block:
+            break
+        # Write image block to temporary file
+        image_temp_file.write(block)
+    # See also: http://docs.djangoproject.com/en/dev/ref/files/file/
+    image_temp_file.flush()
+    temp_file = File(image_temp_file, name=name)
+    api_image.image = temp_file
+    api_image.save()
+    # image = open("./media/images/{}".format(name), "rb").read()
+    # image = "./media/images/{}".format(name)
+    return api_image
+    # return HttpResponse(image, content_type="image/{}".format(image_type))
 
 
 class SearchResults(TemplateView):
     template_name = 'search_results.html'
-
-    # def get_context_data(self, request, *args, **kwargs):
-    #     context = {
-    #         'meal': search_api(request)
-    #     }
-    #     # return context
-    #     return render(request, 'recipe_app/search_results.html', context)
 
 
 class RecipeListView(LoginRequiredMixin, ListView):
@@ -129,32 +180,4 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('recipe_app:index'))
 
-#################################
-################################
 
-
-def search_api(request):
-    meal = {}
-    if 'search' in request.GET:
-        meal_search = request.GET['search']
-        response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?i={}'.format(meal_search))
-        print(response)
-
-        data = response.json()
-        meal = data['meals']
-        print(meal)
-        if meal is None or len(meal) == 0:
-            print('No meals')
-        elif len(meal) >= 1:
-            meal_id_array = [meal[i]['idMeal'] for i in range(len(meal))]
-            random.shuffle(meal_id_array)
-            random_meal_id = meal_id_array[0]
-            rsp = requests.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random_meal_id))
-            randomized_data = rsp.json()
-            random_meal = randomized_data['meals']
-            print('Meal', random_meal)
-            return render(request, 'recipe_app/search_results.html', {'meal': random_meal})
-        else:
-            return HttpResponse('Item not found')
-    else:
-        return render(request, 'recipe_app/search.html', {'meals': meal})

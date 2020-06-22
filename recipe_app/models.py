@@ -35,3 +35,7 @@ class RecipePost(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TemporaryImage(models.Model):
+    image = models.ImageField(upload_to='images', blank=True)
