@@ -12,6 +12,7 @@ from django.views.generic import (TemplateView, ListView,
                                   DetailView, CreateView,
                                   UpdateView, DeleteView)
 
+import os
 import requests
 import random
 from urllib.parse import urlparse
@@ -57,9 +58,10 @@ def temporary_image(url):
     api_image = TemporaryImage()
     img_url = url
 
+    delete_temporary_image()
+
     image_temp_file = NamedTemporaryFile()
     name = urlparse(img_url).path.split('/')[-1]
-    image_type = name.split('.')[-1]
     content = requests.get(img_url, stream=True)
 
     for block in content.iter_content(1024 * 8):
@@ -74,10 +76,24 @@ def temporary_image(url):
     temp_file = File(image_temp_file, name=name)
     api_image.image = temp_file
     api_image.save()
-    # image = open("./media/images/{}".format(name), "rb").read()
-    # image = "./media/images/{}".format(name)
+
     return api_image
-    # return HttpResponse(image, content_type="image/{}".format(image_type))
+
+
+
+def delete_temporary_image():
+    os.chdir('C:\\Users\\feden\PycharmProject\\recipe_suggester\\recipe_suggester\\media\\temporary')
+    file_dict = {}
+    if len(os.listdir()) != 0:
+        for f in os.listdir():
+            file_dict[f] = os.stat(f).st_ctime
+
+        try:
+            m = max(file_dict.values())
+            max_item = [k for k, v in file_dict.items() if v == m]
+            os.remove(max_item[0])
+        except Exception as e:
+            print('Error occured', e)
 
 
 class SearchResults(TemplateView):
