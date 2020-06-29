@@ -38,4 +38,4 @@ class RecipePost(models.Model):
 
 
 class TemporaryImage(models.Model):
-    image = models.ImageField(upload_to='images', blank=True)
+    image = models.ImageField(upload_to='temporary', blank=True)
