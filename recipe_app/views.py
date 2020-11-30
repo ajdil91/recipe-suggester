@@ -47,7 +47,8 @@ def index(request):
             temp_image = temporary_image(image_url)
             # return render(request, 'recipe_app/search_results.html', {'meal': random_meal})
             return render(request, 'recipe_app/search_results.html', context={'meal': random_meal,
-                                                                              'temp_image': temp_image})
+                                                                              'temp_image': temp_image,
+                                                                              'range': range(1, 21)})
         else:
             return HttpResponse('Item not found')
     else:
@@ -80,7 +81,6 @@ def temporary_image(url):
     return api_image
 
 
-
 def delete_temporary_image():
     os.chdir('C:\\Users\\feden\PycharmProject\\recipe_suggester\\recipe_suggester\\media\\temporary')
     file_dict = {}
@@ -106,6 +106,11 @@ class RecipeListView(LoginRequiredMixin, ListView):
     model = RecipePost
 
     def get_queryset(self):
+
+        query = self.request.GET.get('search_recipes')
+
+        if query:
+            return RecipePost.objects.filter(title__icontains=query)
         return RecipePost.objects.filter(create_date__lte=timezone.now()).order_by('-create_date')
 
 

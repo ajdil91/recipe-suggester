@@ -4,49 +4,35 @@
 <div class="container">
     {% if user.is_authenticated %}
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="list-page-header">Daily Yum!</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-7 detail-image-div">
+            <div class="col-sm-12 col-lg-12 text-center detail-image-div">
                 {% if recipepost.image %}
                     <img class="recipe-detail-image" src="{{ recipepost.image.url }}">
                 {% endif %}
             </div>
-            <div class="col-lg-5 recipe-detail-text">
-                <h1 class="list-page-header">{{ recipepost.title }} <a href="{{ recipepost.url }}" target="_blank" class="recipe-detail-url"><svg class="bi bi-box-arrow-up-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h8a1.5 1.5 0 001.5-1.5V9a.5.5 0 00-1 0v4a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V5a.5.5 0 01.5-.5h4a.5.5 0 000-1H3A1.5 1.5 0 001.5 5v8zm7-11a.5.5 0 01.5-.5h5a.5.5 0 01.5.5v5a.5.5 0 01-1 0V2.5H9a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-                      <path fill-rule="evenodd" d="M14.354 1.646a.5.5 0 010 .708l-8 8a.5.5 0 01-.708-.708l8-8a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-                    </svg>
-                </a></h1>
-                <p>{{ recipepost.text }}</p>
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <p class="post-details">{{ recipepost.author }} | {{recipepost.create_date}}</p>
-                    </div>
-                    <div class="col-12 col-lg-4 text-center">
-                        <a class="modify-button" href="{% url 'recipe_app:recipe_update' pk=recipepost.pk %}">
-                            <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
-                              <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
-                            </svg>
-                        </a>
-                        <a class="modify-button" href="{% url 'recipe_app:recipe_delete' pk=recipepost.pk %}">
-                            <svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
-                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
-                            </svg>
-                        </a>
-                    </div>
-
-                </div>
+            <div class="recipe-detail-text">
+                <a href="{{ recipepost.url }}" target="_blank"><h3 class="detail-page-header">{{ recipepost.title }}</h3>
+                </a>
+                <p class="post-details">{{ recipepost.author }} | {{recipepost.create_date}}</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <p>{{ recipepost.ingredients|safe }}</p>
+            <div class="recipe-ingredients">
+                {{ recipepost.ingredients|safe }}
             </div>
+        </div>
+        <div class="text-center">
+            <a class="modify-button" href="{% url 'recipe_app:recipe_update' pk=recipepost.pk %}">
+                <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <a class="modify-button" href="{% url 'recipe_app:recipe_delete' pk=recipepost.pk %}">
+                <svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
+                </svg>
+            </a>
         </div>
     {% endif %}
 </div>

@@ -6,9 +6,12 @@ a p {
     font-family: 'Roboto', sans-serif;
 }
 
+a:hover {
+    text-decoration: none !important;
+}
+
 body {
     background-color: #fffaf4 !important;
-    padding-bottom: 40px;
 }
 
 .avatar {
@@ -77,6 +80,7 @@ body {
 #base-nav {
     background-color: black;
     color: white;
+    z-index: 2;
 }
 
 .nav-item {
@@ -94,7 +98,7 @@ body {
 }
 
 #banner{
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url("../images/sebastian-coman-photography-g6a9U4CjI0k-unsplash.jpg") fixed;
+    background: url("../images/brooke-lark-08bOYnH_r_E-unsplash.jpg") fixed;
     background-size: 100%;
     width: 100%;
     height: 700px;
@@ -105,14 +109,13 @@ body {
 
 .active-white {
     color: white;
-}
+}detail-image-div
 
 @media screen and (max-width: 850px) {
     #banner{
-        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url("../images/sebastian-coman-photography-g6a9U4CjI0k-unsplash.jpg") fixed;
-        background-size: cover;
-        width: 100%;
-        height: 650px;
+        background: url(../images/brooke-lark-08bOYnH_r_E-unsplash.jpg) fixed;
+        background-size: 800px;
+        height: 600px;
         background-repeat: no-repeat;
         position: relative;
         display: block;
@@ -120,13 +123,15 @@ body {
 }
 
 .homepage-content {
-    text-align: center;
+    text-align: center
 }
 
 .homepage-content h1{
-    color: white;
+    color: black;
     padding-top: 200px;
+    padding-bottom: 30px;;
     font-size: 54px;
+    font-family: "Josefin Slab";
 }
 
 h1 {
@@ -136,12 +141,37 @@ h1 {
 /**************************/
 /* Recipe Post List Page */
 /**************************/
-
-.list-page-header {
-    margin-top: 30px;
-    margin-bottom: 30px;
+.list-page-header{
+    background-color: #ffda08;
 }
-
+.list-page-header-text {
+    color: #212529;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    font-family: 'Josefin Slab', serif;
+    background-color: #ffda08;
+    font-size: 52px;
+}
+/*
+.list-page-header-text:hover{
+    color: #666560;
+}*/
+.list-search-form{
+    padding-bottom: 80px;
+    margin-bottom: 20px;
+}
+.list-page-search{
+    width: 90% !important;
+    border: 2px solid black!important;
+    border-radius: 0!important;
+}
+.list-search-button{
+    color: white!important;
+    background-color: black!important;
+    border-radius: 0!important;
+    border-color: black!important;
+}
 .thumbnail {
     padding: .50rem;
     background-color: #fff;
@@ -170,6 +200,15 @@ h1 {
     border: 5px solid;
 }
 
+.recipe-ingredients {
+    padding: 100px;
+    background-color: #F8F8F8;
+    width: 900px;
+    margin: auto;
+    margin-bottom: 30px;
+    font-family: 'Quicksand', sans-serif;
+}
+
 /*
 .recipe-card:hover {
     box-shadow: 0px 0px 7px 7px #ebebeb;
@@ -179,7 +218,7 @@ h1 {
 .add-button {
     display: inline-block;
     font-weight: 600;
-    color: #212529;
+    color: #0c8e7b;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -200,8 +239,13 @@ h1 {
 }
 
 .add-button:hover {
-    color: #666560;
+    color: #457c74;
     text-decoration: none;
+}
+
+.plus-circle {
+    border-radius: 50%;
+    box-shadow: 1px 3px 8px 0px #9e9999
 }
 
 /****************************/
@@ -209,35 +253,36 @@ h1 {
 /****************************/
 
 .recipe-detail-image {
-    width: 650px;
+    width: 900px;
     height: 500px;
     object-fit: cover;
     border-style: solid;
     color: black;
     border-width: 10px;
+    margin-top: 50px;
+}
+
+.detail-page-header{
+    color: #212529;
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Josefin Slab', serif;
 }
 
 .recipe-detail-text{
     background-color: #ffda08;
-    position: relative;
-    width: auto;
-    height: 500px;
-    padding-left: 50px !important;
+    position: absolute;
+    top: 500px;
+    right: 170px;
+    width: 380px;
+    height: 200px;
     padding-top: 25px;
     border: 4px;
     border-style: solid;
     color: black;
-    outline: 10px solid black;
-    outline-offset: -25px;
-}
-
-.recipe-detail-url {
-    color: #212529;
-    font-size: 1.8rem;
-}
-
-.recipe-detail-url:hover {
-    color: #666560;
+    outline: 6px solid black;
+    outline-offset: -18px;
+    z-index: 2;
 }
 
 .modify-button {
@@ -266,7 +311,9 @@ h1 {
 }
 
 .post-details {
-    padding-top: 1rem;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Quicksand";
 }
 
 /*******************/
@@ -301,25 +348,48 @@ h1 {
 /**************/
 
 @media screen and (max-width: 850px) {
+    #banner{
+        background: linear-gradient(rgba(22,22,22,0.4), rgba(22,22,22, 0.02)), url(../images/brooke-lark-08bOYnH_r_E-unsplash.jpg) fixed;
+        background-position: 40%;
+        background-size: 800px;
+        height: 600px;
+        background-repeat: no-repeat;
+        position: relative;
+        display: block;
+    }
+    .homepage-content h1 {
+        color: white;
+        padding-top: 180px;
+        padding-bottom: 30px;
+        font-size: 45px;
+        font-family: "Josefin Slab";
+        font-weight: bolder;
+    }
     .recipe-detail-image {
         width: 100%;
-        height: 500px;
+        height: 550px;
         object-fit: cover;
-        border-style: solid;
+        border-style: none;
         color: black;
         border-width: 10px;
+        margin-top: 0px;
     }
     .detail-image-div {
         padding: 0px !important;
     }
-    .list-page-header {
+    .list-page-header-text {
+        color: #212529;
+        margin-top:0px;
         text-align: center;
+        font-family: 'Josefin Slab', serif;
+        background-color: #ffda08;
+        padding: 50px;
     }
-    #phone-padding {
-        padding-left: 0;
+    .phone-padding {
+        padding: 0 !important;
     }
     .card.recipe-card {
-        width: 23rem !important;
+        width: 18rem !important;
         margin-bottom: 15px;
         border: 5px solid;
         display: block;
@@ -328,16 +398,26 @@ h1 {
     }
     .recipe-detail-text {
         background-color: #ffda08;
-        position: relative;
-        width: auto;
-        height: 350px;
+        position: absolute;
+        width: 350px;
+        height: auto;
+        top: 530px;
+        right: 30px;
         padding: 25px 30px !important;
         border: 4px;
         border-style: solid;
         color: black;
-        outline: 10px solid black;
-        outline-offset: -25px;
+        outline: 6px solid black;
+        outline-offset: -18px;
         text-align: center;
+    }
+    .recipe-ingredients {
+        padding: 200px 30px;
+        background-color: #F8F8F8;
+        width: 900px;
+        margin: auto;
+        margin-bottom: 30px;
+        font-family: 'Quicksand', sans-serif;
     }
     #add-recipe-form {
         background-color: white;
@@ -347,7 +427,12 @@ h1 {
     #add-recipe-form h1{
         text-align: center;
     }
-    .add-button {
-        display: none;
+    .list-search-form{
+        padding-bottom: 60px;
+        padding-left: 42px!important;
+        margin-bottom: 20px;
+    }
+    .list-page-search{
+        width: 80% !important;
     }
 }
