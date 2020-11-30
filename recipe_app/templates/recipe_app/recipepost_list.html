@@ -1,13 +1,25 @@
 {% extends 'recipe_app/base.html' %}
 {% block body_block %}
 {% load static %}
+
+<div class="list-page-header">
+    <h1 class="list-page-header-text">My Favorite Recipes!</h1>
+    <div class="col-lg-4 offset-lg-4 list-search-form">
+        <form class="form-inline active-white" method="GET">
+           {% csrf_token %}
+              <input type="text" class="form-control list-page-search" name="search_recipes" placeholder="Search for recipe" aria-label="Search" aria-describedby="basic-addon2">
+               <div class="input-group-append">
+                 <button class="btn btn-outline-secondary list-search-button" type="submit"><i class="fas fa-search" aria-hidden="true"></i></button>
+               </div>
+        </form>
+    </div>
+</div>
+
+
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center"><h1 class="list-page-header">My Favorite Recipes!</h1></div>
-    </div>
-    <div class="row">
     {% for recipe in recipepost_list %}
-            <div class="col-lg-4" id="phone-padding">
+            <div class="col-lg-4 phone-padding">
                 <a href="{% url 'recipe_app:recipepost_detail' pk=recipe.pk %}" class="recipe-card-link">
                     <div class="card recipe-card" style="width: 18rem;">
                         {% if recipe.image %}
@@ -27,11 +39,9 @@
     </div>
     <div class="row">
         <div class="fixed-bottom">
-            <a href="{% url 'recipe_app:recipe_new' %}" class="add-button"><svg class="bi bi-plus-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
-                  <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                  </svg>
+            <a href="{% url 'recipe_app:recipe_new' %}" class="add-button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+            </svg>
             </a>
         </div>
     </div>
