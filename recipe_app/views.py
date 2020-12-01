@@ -45,14 +45,29 @@ def index(request):
             print('Meal', random_meal)
             image_url = random_meal[0]['strMealThumb']
             temp_image = temporary_image(image_url)
+            ing_measurements = ingredients_measurements_dict(random_meal)
             # return render(request, 'recipe_app/search_results.html', {'meal': random_meal})
             return render(request, 'recipe_app/search_results.html', context={'meal': random_meal,
                                                                               'temp_image': temp_image,
-                                                                              'range': range(1, 21)})
+                                                                              'range': range(1, 21),
+                                                                              'ing_measurements': ing_measurements})
         else:
             return HttpResponse('Item not found')
     else:
         return render(request, 'recipe_app/index.html', {'meals': meal})
+
+
+def ingredients_measurements_dict(meal):
+    meals = {}
+    for i in range(1, 21):
+        ing = 'strIngredient{}'.format(i)
+        measure = 'strMeasure{}'.format(i)
+        meal_ing = meal[0][ing]
+        meal_measure = meal[0][measure]
+        if len(meal_ing) > 1:
+            meals[meal_ing] = meal_measure
+    print('There are the ingredients: ', meals)
+    return meals
 
 
 def temporary_image(url):

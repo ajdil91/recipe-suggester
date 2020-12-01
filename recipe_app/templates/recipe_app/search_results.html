@@ -20,9 +20,11 @@
         <div class="row">
             <div class="recipe-ingredients">
                 <h3>Ingredients</h3>
+                {% for k,v in ing_measurements.items %}
                     <ul>
-                        <li>{{ meal.0.strIngredient1 }} | {{ meal.0.strMeasure1 }}</li>
+                        <li>{{ k }} | {{ v }}</li>
                     </ul>
+                {% endfor %}
                 <h3>Instructions</h3>
                 <p>{{ meal.0.strInstructions }}</p>
             </div>
