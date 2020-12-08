@@ -17,7 +17,7 @@ import requests
 import random
 from urllib.parse import urlparse
 from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
+from django.core.files.temp import NamedTemporaryFile, TemporaryFile
 
 # Create your views here.
 
