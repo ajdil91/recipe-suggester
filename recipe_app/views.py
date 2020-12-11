@@ -18,6 +18,7 @@ import random
 from urllib.parse import urlparse
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile, TemporaryFile
+from temp import tempdir
 
 # Create your views here.
 
@@ -74,7 +75,10 @@ def temporary_image(url):
     api_image = TemporaryImage()
     img_url = url
 
-    delete_temporary_image()
+    # delete_temporary_image()
+    current_image = TemporaryImage.objects.last()
+    print(current_image)
+    current_image.delete()
 
     image_temp_file = NamedTemporaryFile()
     name = urlparse(img_url).path.split('/')[-1]
@@ -96,19 +100,19 @@ def temporary_image(url):
     return api_image
 
 
-def delete_temporary_image():
-    os.chdir('C:\\Users\\feden\PycharmProject\\recipe_suggester\\recipe_suggester\\media\\temporary')
-    file_dict = {}
-    if len(os.listdir()) != 0:
-        for f in os.listdir():
-            file_dict[f] = os.stat(f).st_ctime
-
-        try:
-            m = max(file_dict.values())
-            max_item = [k for k, v in file_dict.items() if v == m]
-            os.remove(max_item[0])
-        except Exception as e:
-            print('Error occured', e)
+# def delete_temporary_image():
+#     os.chdir('C:\\Users\\feden\PycharmProject\\recipe_suggester\\recipe_suggester\\media\\temporary')
+#     file_dict = {}
+#     if len(os.listdir()) != 0:
+#         for f in os.listdir():
+#             file_dict[f] = os.stat(f).st_ctime
+#
+#         try:
+#             m = max(file_dict.values())
+#             max_item = [k for k, v in file_dict.items() if v == m]
+#             os.remove(max_item[0])
+#         except Exception as e:
+#             print('Error occured', e)
 
 
 class SearchResults(TemplateView):

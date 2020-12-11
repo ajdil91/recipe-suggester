@@ -39,3 +39,8 @@ class RecipePost(models.Model):
 
 class TemporaryImage(models.Model):
     image = models.ImageField(upload_to='temporary', blank=True)
+    objects = models.Manager()
+
+    def delete(self, *args, **kwargs):
+        super(TemporaryImage, self).delete(*args, **kwargs)
+        self.image.delete(save=False)
