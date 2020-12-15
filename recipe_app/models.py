@@ -3,8 +3,12 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import resolvers, reverse
 from ckeditor.fields import RichTextField
+import datetime
+import pytz
 
 # Create your models here.
+
+timezone.activate(pytz.timezone("Asia/Tokyo"))
 
 
 class UserProfileInfo(models.Model):
@@ -22,11 +26,11 @@ class RecipePost(models.Model):
     image = models.ImageField(upload_to='recipe_images', blank=True)
     description = models.TextField(blank=True)
     ingredients = RichTextField(blank=True, null=True)
-    create_date = models.DateTimeField(default=timezone.now())
+    create_date = models.DateTimeField(default=datetime.datetime.now(tz=pytz.timezone('Asia/Tokyo')))
     published_date = models.DateTimeField(blank=True, null=True)
 
     def published(self):
-        self.published_date = timezone.now()
+        self.published_date = datetime.datetime.now(tz=pytz.timezone('Asia/Tokyo'))
         self.save()
 
     def get_absolute_url(self):

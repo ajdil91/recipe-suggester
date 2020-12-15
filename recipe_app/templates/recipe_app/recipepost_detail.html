@@ -1,7 +1,7 @@
 {% extends 'recipe_app/base.html' %}
 {% block body_block %}
 {% load static %}
-<div class="container">
+<div class="container" style="position:relative;">
     {% if user.is_authenticated %}
         <div class="row">
             <div class="col-sm-12 col-lg-12 text-center detail-image-div">
@@ -12,7 +12,7 @@
             <div class="recipe-detail-text">
                 <a href="{{ recipepost.url }}" target="_blank"><h3 class="detail-page-header">{{ recipepost.title }}</h3>
                 </a>
-                <p class="post-details">{{ recipepost.author }} | {{recipepost.create_date}}</p>
+                <p class="post-details">{{ recipepost.author }} | {{recipepost.create_date|date:"D M Y"}}</p>
             </div>
         </div>
         <div class="row">

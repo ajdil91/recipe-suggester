@@ -269,11 +269,15 @@ h1 {
     font-family: 'Josefin Slab', serif;
 }
 
+.detail-page-header:hover{
+    color: #21252969;
+}
+
 .recipe-detail-text{
     background-color: #ffda08;
     position: absolute;
-    top: 500px;
-    right: 170px;
+    top: 460px;
+    right: 60px;
     width: 380px;
     height: 200px;
     padding-top: 25px;
