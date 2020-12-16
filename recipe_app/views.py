@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from .models import RecipePost, TemporaryImage
+from django.contrib import messages
 # from .services import search_api
 from .forms import UserForm, UserProfileInfoForm, RecipePostForm
 from django.views.generic import (TemplateView, ListView,
@@ -182,6 +183,7 @@ def register_user(request):
 
             registered_complete = True
 
+
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -210,6 +212,8 @@ def user_login(request):
         else:
             print('Someone tried to login and failed')
             print('Username: {username} and Password: {password}'.format(username=username, password=password))
+            messages.error(request, 'username or password not correct')
+            return HttpResponseRedirect(reverse('recipe_app:login'))
     else:
         return render(request, 'recipe_app/login.html', context={})
 

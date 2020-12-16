@@ -403,10 +403,10 @@ h1 {
     .recipe-detail-text {
         background-color: #ffda08;
         position: absolute;
-        width: 350px;
+        width: 100%;
         height: auto;
-        top: 530px;
-        right: 30px;
+        top: 550px;
+        right: 0px;
         padding: 25px 30px !important;
         border: 4px;
         border-style: solid;
