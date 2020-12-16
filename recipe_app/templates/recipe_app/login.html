@@ -5,9 +5,12 @@
    <div class="jumbotron" id="add-recipe-form">
         <h1>Please Login</h1>
 
-        {% if form.errors %}
-            <p>Your username and password didn't match! Please try again.</p>
-        {% endif %}
+<!--        {% if form.errors %}-->
+<!--            <p>Your username and password didn't match! Please try again.</p>-->
+       {% for message in messages %}
+            <p>{{ message }}</p>
+       {% endfor %}
+<!--        {% endif %}-->
 
         <form action="{% url 'recipe_app:login' %}" method="post">
             <div class="container">
