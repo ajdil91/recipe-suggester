@@ -36,6 +36,7 @@ def index(request):
         print(meal)
         if meal is None or len(meal) == 0:
             print('No meals')
+            return render(request, 'recipe_app/meal_not_found.html', {'meals': meal})
         elif len(meal) >= 1:
             meal_id_array = [meal[i]['idMeal'] for i in range(len(meal))]
             random.shuffle(meal_id_array)
@@ -47,7 +48,6 @@ def index(request):
             image_url = random_meal[0]['strMealThumb']
             temp_image = temporary_image(image_url)
             ing_measurements = ingredients_measurements_dict(random_meal)
-            # return render(request, 'recipe_app/search_results.html', {'meal': random_meal})
             return render(request, 'recipe_app/search_results.html', context={'meal': random_meal,
                                                                               'temp_image': temp_image,
                                                                               'range': range(1, 21),
@@ -117,6 +117,10 @@ def temporary_image(url):
 
 class SearchResults(TemplateView):
     template_name = 'search_results.html'
+
+
+class MealNotFound(TemplateView):
+    template_name = 'meal_not_found.html'
 
 
 class RecipeListView(LoginRequiredMixin, ListView):
