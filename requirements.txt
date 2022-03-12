@@ -8,7 +8,7 @@ django-bootstrap3==12.1.0
 django-ckeditor==5.9.0
 django-js-asset==1.2.2
 idna==2.9
-Pillow==7.1.1
+Pillow==9.0.1
 pycparser==2.20
 pytz==2019.3
 requests==2.23.0
